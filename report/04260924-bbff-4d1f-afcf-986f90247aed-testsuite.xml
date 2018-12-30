@@ -1,0 +1,150 @@
+<ns0:test-suite xmlns:ns0="urn:model.allure.qatools.yandex.ru" start="1546135947935" stop="1546136019847">
+  <name>test_login2</name>
+  <labels/>
+  <test-cases>
+    <test-case start="1546135947935" status="passed" stop="1546135994900">
+      <name>TestLogin.test_login[13488834010-159357li-1-None-None]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="2792-MainThread"/>
+        <label name="host" value="DESKTOP-CIMBS2F"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps>
+        <step start="1546135969635" status="passed" stop="1546135972539">
+          <name>点击我的</name>
+          <title>点击我的</title>
+          <attachments/>
+          <steps/>
+        </step>
+        <step start="1546135972539" status="passed" stop="1546135977000">
+          <name>点击已有账号</name>
+          <title>点击已有账号</title>
+          <attachments/>
+          <steps/>
+        </step>
+        <step start="1546135977000" status="passed" stop="1546135986029">
+          <name>登录逻辑</name>
+          <title>登录逻辑</title>
+          <attachments>
+            <attachment source="57fa83e3-a78c-4285-ad59-dff7f453906f-attachment.txt" title="登录" type="text/plain"/>
+            <attachment source="6dd791d1-d5d3-4e1e-850c-4c8ce0a6859f-attachment.txt" title="登录" type="text/plain"/>
+            <attachment source="f02da94c-7c2b-4f16-9ae7-fb28726b55df-attachment.txt" title="登录" type="text/plain"/>
+          </attachments>
+          <steps/>
+        </step>
+        <step start="1546135986029" status="passed" stop="1546135988773">
+          <name>判断是否登录成功</name>
+          <title>判断是否登录成功</title>
+          <attachments>
+            <attachment source="805de824-5d56-4c3c-9dcb-b7ee16388749-attachment.txt" title="个人中心" type="text/plain"/>
+          </attachments>
+          <steps/>
+        </step>
+        <step start="1546135988773" status="passed" stop="1546135989863">
+          <name>进入个人中心设置页面</name>
+          <title>进入个人中心设置页面</title>
+          <attachments/>
+          <steps/>
+        </step>
+        <step start="1546135989864" status="passed" stop="1546135994900">
+          <name>退出账号</name>
+          <title>退出账号</title>
+          <attachments>
+            <attachment source="84740571-5684-4b70-bd53-4341e27b4666-attachment.txt" title="退出账号" type="text/plain"/>
+            <attachment source="561b4a01-4121-4b1d-ab86-ea2dad0a804d-attachment.txt" title="退出账号" type="text/plain"/>
+            <attachment source="f548902b-0b0f-4981-94e9-2f614bcc050f-attachment.txt" title="退出账号" type="text/plain"/>
+          </attachments>
+          <steps/>
+        </step>
+      </steps>
+    </test-case>
+    <test-case start="1546135994940" status="failed" stop="1546136019847">
+      <name>TestLogin.test_login[11111\u4e2d\u56fd-9998888-0-\u4e0d\u5b58\u5728-\u6b64\u7528\u6237\u4e0d\u5b58\u5728111]</name>
+      <failure>
+        <message>FileNotFoundError: [Errno 2] No such file or directory: 'png_name'</message>
+        <stack-trace>self = &lt;test_login2.TestLogin object at 0x0000021B3A0B4438&gt;, username = '11111中国', password = '9998888', tag = 0, get_toast_msg = '不存在', except_msg = '此用户不存在111'
+
+    @pytest.mark.parametrize("username,password,tag,get_toast_msg,except_msg", get_data())
+    def test_login(self, username, password, tag, get_toast_msg, except_msg):
+        # 1.点击我的
+        self.navigation_page.get_home_page_obj().click_my_button()
+        # 2.点击已有账号
+        self.navigation_page.get_sign_in_page_obj().click_exist_accout()
+        # 3.输入用户名密码 点击登录
+        self.navigation_page.get_login_page_obj().login_in(username, password)
+        if tag == 1:
+            try:
+                login_state = self.navigation_page.get_person_center_page_obj().is_login_sucess()
+                # 4.点击个人中心设置按钮
+                self.navigation_page.get_person_center_page_obj().click_person_center_setting()
+                # 5.点击退出
+                self.navigation_page.get_setting_page_obj().logout_account()
+                assert login_state,self.navigation_page.get_person_center_page_obj().get_screen()
+            except:
+                #6.截图 在哪一个页面出现的问题
+                self.navigation_page.get_person_center_page_obj().get_screen()
+                self.navigation_page.get_login_page_obj().close_login_page()
+        else:
+            try:
+                toast_message = self.navigation_page.get_person_center_page_obj().get_toast_message(get_toast_msg)
+&gt;               assert toast_message == except_msg,self.navigation_page.get_person_center_page_obj().get_screen()
+
+script\test_login2.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;page.person_center_page.PersonCenterPage object at 0x0000021B3A0898D0&gt;
+
+    def get_screen(self):
+        #截图名称
+        png_name = "./screen/{}.png".format(int(time.time()))
+        self.driver.get_screenshot_as_file(png_name)
+    
+&gt;       with open("png_name", "rb") as f:
+E       FileNotFoundError: [Errno 2] No such file or directory: 'png_name'
+
+base\base_aciton.py:63: FileNotFoundError</stack-trace>
+      </failure>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="2792-MainThread"/>
+        <label name="host" value="DESKTOP-CIMBS2F"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps>
+        <step start="1546135994948" status="passed" stop="1546135996066">
+          <name>点击我的</name>
+          <title>点击我的</title>
+          <attachments/>
+          <steps/>
+        </step>
+        <step start="1546135996066" status="passed" stop="1546135998794">
+          <name>点击已有账号</name>
+          <title>点击已有账号</title>
+          <attachments/>
+          <steps/>
+        </step>
+        <step start="1546135998794" status="passed" stop="1546136008630">
+          <name>登录逻辑</name>
+          <title>登录逻辑</title>
+          <attachments>
+            <attachment source="c95420e0-8e65-47ce-b4d1-4bde832f5c64-attachment.txt" title="登录" type="text/plain"/>
+            <attachment source="016aba09-42a0-46fb-b206-3b6fe9e05533-attachment.txt" title="登录" type="text/plain"/>
+            <attachment source="ef8b5399-0fc9-4793-8114-6da755cbbced-attachment.txt" title="登录" type="text/plain"/>
+          </attachments>
+          <steps/>
+        </step>
+        <step start="1546136008630" status="passed" stop="1546136009844">
+          <name>获取吐司</name>
+          <title>获取吐司</title>
+          <attachments/>
+          <steps/>
+        </step>
+      </steps>
+    </test-case>
+  </test-cases>
+</ns0:test-suite>
